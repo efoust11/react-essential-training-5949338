@@ -1,34 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+function Header({ name, year }){
+  return(
+    <header>
+        <h1>{name}'s Kitchen</h1>
+        <p>Copyright {year}</p>
+    </header>
+  )
+}
 
+const items = [
+  "Macaroni and Cheese",
+  "Salmon with Potatoes",
+  "Tofu with Vegetables",
+  "Minestrone Soup"
+]
+
+const dishObjects = items.map((dish, i) => ({
+  id: i,
+  title: dish
+}));
+
+function Main({ dishes }){
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>My react project</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ul>
+      {dishes.map((dish) => (
+        <li key = {dish.id} style = {{listStyleType:"none"}}>{dish.title}</li>))}
+    </ul>
+  )
+}
+
+function App() {
+
+
+  return (<div>
+    <Header name = "Alex" year = {new Date().getFullYear()}/>
+    <Main dishes = {dishObjects}/></div>
   )
 }
 
